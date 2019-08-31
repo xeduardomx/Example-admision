@@ -3,6 +3,7 @@ package com.syson.ejercicio.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -15,12 +16,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.syson.ejercicio.exception.ResourceNotFoundException;
+import com.syson.ejercicio.exception.ServiceException;
 import com.syson.ejercicio.model.Auto;
 import com.syson.ejercicio.repository.AutoRepository;
 
@@ -28,57 +30,58 @@ import com.syson.ejercicio.repository.AutoRepository;
 @Path("/api/v1")
 public class AutoResource {
 
- @Autowired
- private AutoRepository AutoRepository;
+	@Autowired
+	private AutoRepository autoRepository;
 
- @GET
- @Produces("application/json")
- @Path("/Autos")
- public List<Auto> getAllAutos() {
-  return AutoRepository.findAll();
- }
+	@GET
+	@Produces("application/json")
+	@Path("/autos")
+	public List<Auto> getAllAutos() {
+		return autoRepository.findAll();
+	}
 
- @GET
- @Produces("application/json")
- @Path("/Autos/{id}")
- public ResponseEntity<Auto> getAutoById(@PathParam(value = "id") Long AutoId) throws ResourceNotFoundException {
-  Auto Auto = AutoRepository.findById(AutoId)
-    .orElseThrow(() -> new ResourceNotFoundException("Auto not found :: " + AutoId));
-  return ResponseEntity.ok().body(Auto);
- }
+	@GET
+	@Produces("application/json")
+	@Path("/autos/{id}")
+	public ResponseEntity<Auto> getAutoById(@PathParam(value = "id") Long autoId) throws ServiceException {
+		Auto auto = autoRepository.findById(autoId)
+				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Auto not found :: " + autoId, 1));
+		return ResponseEntity.ok().body(auto);
+	}
+	
+	@POST
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("/autos")
+	@PostMapping("/autos")
+	public Auto createAuto(Auto auto) {
+		return autoRepository.save(auto);
+	}
 
- @POST
- @Produces("application/json")
- @Consumes("application/json")
- @Path("/Autos")
- @PostMapping("/Autos")
- public Auto createAuto(Auto Auto) {
-  return AutoRepository.save(Auto);
- }
+	@PUT
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("/autos/{id}")
+	public ResponseEntity<Auto> updateAuto(@PathParam(value = "id") Long autoId, @Valid @RequestBody Auto autoDetails)
+			throws ServiceException {
+		Auto auto = autoRepository.findById(autoId)
+				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Auto not found :: " + autoId, 1));
+		auto.setDescripcion(autoDetails.getDescripcion());
+		auto.setCostoBase(autoDetails.getCostoBase());
+		final Auto updatedAuto = autoRepository.save(auto);
+		return ResponseEntity.ok(updatedAuto);
+	}
 
- @PUT
- @Consumes("application/json")
- @Path("/Autos/{id}}")
- public ResponseEntity<Auto> updateAuto(@PathParam(value = "id") Long AutoId,
-   @Valid @RequestBody Auto AutoDetails) throws ResourceNotFoundException {
-  Auto Auto = AutoRepository.findById(AutoId)
-    .orElseThrow(() -> new ResourceNotFoundException("Auto not found :: " + AutoId));
+	@DELETE
+	@Path("/autos/{id}")
+	@Produces("application/json")
+	public Map<String, Boolean> deleteAuto(@PathParam(value = "id") Long autoId) throws ServiceException {
+		Auto auto = autoRepository.findById(autoId)
+				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Auto not found :: " + autoId, 1));
 
-  Auto.setDescripcion(AutoDetails.getDescripcion());
-  Auto.setCostoBase(AutoDetails.getCostoBase());
-  final Auto updatedAuto = AutoRepository.save(Auto);
-  return ResponseEntity.ok(updatedAuto);
- }
-
- @DELETE
- @Path("/Autos/{id}")
- public Map<String, Boolean> deleteAuto(@PathParam(value = "id") Long AutoId) throws ResourceNotFoundException {
-  Auto Auto = AutoRepository.findById(AutoId)
-    .orElseThrow(() -> new ResourceNotFoundException("Auto not found :: " + AutoId));
-
-  AutoRepository.delete(Auto);
-  Map<String, Boolean> response = new HashMap<>();
-  response.put("deleted", Boolean.TRUE);
-  return response;
- }
+		autoRepository.delete(auto);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+		return response;
+	}
 }

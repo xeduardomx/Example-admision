@@ -19,7 +19,7 @@ public class Auto {
 	private String descripcion;
 	 
 	@Column(name = "costo_base", nullable = false)
-	private String costoBase;
+	private double costoBase;
 
 
 	public long getId() {
@@ -38,11 +38,11 @@ public class Auto {
 		this.descripcion = descripcion;
 	}
 
-	public String getCostoBase() {
+	public double getCostoBase() {
 		return costoBase;
 	}
 
-	public void setCostoBase(String costoBase) {
+	public void setCostoBase(double costoBase) {
 		this.costoBase = costoBase;
 	}
 
