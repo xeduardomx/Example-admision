@@ -82,12 +82,10 @@ A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, 
   3.	Un método post para registrar nuevas opciones.
   4.	Un método para eliminar existentes. 
 
+
 Ver documentacion en:
 
 http://localhost:8080/sysone/swagger.json
-
-http://localhost:8080/swagger-ui.html
-
 
 
 ENDPOINTS
