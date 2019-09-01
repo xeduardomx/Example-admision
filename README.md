@@ -95,8 +95,11 @@ ENDPOINTS
 VENTAS
 
 Crear una venta nueva:
+metodo POST:
 http://localhost:8080/sysone/api/v1/sales
-metodo POST
+
+
+
 {
     "car": {
             "id": 1
@@ -104,7 +107,9 @@ metodo POST
     "options": ["AA","AB","LL"]
 }
 
+
 Respuesta:
+
 
 {
     "id": 50,
@@ -124,6 +129,9 @@ Listar Ventas:
 metodo GET
 http://localhost:8080/sysone/api/v1/sales/
 Respuesta:
+
+
+
 [
     {
         "id": 42,
@@ -160,7 +168,10 @@ Buscar por ID:
 metodo GET
 http://localhost:8080/sysone/api/v1/sales/42
 
+
 Respuestas:
+
+
 {
     "headers": {},
     "body": {
@@ -181,9 +192,12 @@ Respuestas:
     "statusCodeValue": 200
 }
 
+
 EDITAR:
 metodo PUT
 http://localhost:8080/sysone/api/v1/sales/49
+
+
 {
     "id": 42,
     "car": {
@@ -192,7 +206,9 @@ http://localhost:8080/sysone/api/v1/sales/49
     "options": ["AA","AB","LL"]
 }
 
+
 Respuestas:
+
 
 {
     "headers": {},
@@ -219,6 +235,7 @@ Eliminar:
 Metodo DELETE
 http://localhost:8080/sysone/api/v1/sales/42
 
+
 Respuesta:
 {
     "deleted": true
@@ -231,12 +248,17 @@ AUTOMOVILES
 Crear:
 Metodo POST
 http://localhost:8080/sysone/api/v1/cars
+
+
 {
     "name": "Sedán",
     "baseCost": 230000.0
 }
 
+
 Respuesta:
+
+
 {
     "id": 3,
     "name": "Sedán",
@@ -248,6 +270,8 @@ Respuesta:
 Listar todos:
 Metodo GET
 http://localhost:8080/sysone/api/v1/cars
+
+
 [
     {
         "id": 1,
@@ -266,9 +290,11 @@ http://localhost:8080/sysone/api/v1/cars
     }
 ]
 
+
 Buscar por ID:
 Metodo GET
 http://localhost:8080/sysone/api/v1/cars/1
+
 
 Respuesta:
 {
@@ -282,9 +308,11 @@ Respuesta:
     "statusCodeValue": 200
 }
 
+
 Eliminar:
 Metodo DELETE
 http://localhost:8080/sysone/api/v1/sales/42
+
 
 Respuesta:
 {
@@ -298,20 +326,31 @@ Opciones/Piezas Adicionales
 Crear
 Metodo POST
 http://localhost:8080/sysone/api/v1/options
+
+
 {
 	"description": "Sistema de Frenos ABS",
-    "priceOption": 14000.0,
-    "shortCut": "ABS"
+	"priceOption": 14000.0,
+	"shortCut": "ABS"
 }
+
 
 Respuesta:
 
+
+{
+    "id": 11,
+    "description": "Sistema de Frenos ABS",
+    "priceOption": 14000.0,
+    "shortCut": "ABS"
+}
 
 
 Listar todos:
 Metodo GET
 http://localhost:8080/sysone/api/v1/options/
 Respuesta:
+
 
 [
     {
@@ -353,6 +392,7 @@ Metodo GET
 http://localhost:8080/sysone/api/v1/options/9
 Respuesta:
 
+
 {
     "headers": {},
     "body": {
@@ -367,16 +407,21 @@ Respuesta:
 
 
 
+
 Modificar
 Metodo PUT
 http://localhost:8080/sysone/api/v1/options/11
+
+
 {
 	"description": "Sistema de Frenos ABS",
     "priceOption": 14000.0,
     "shortCut": "ABS"
 }
 
+
 Respuesta:
+
 
 {
     "headers": {},
@@ -395,6 +440,7 @@ Eliminar
 Metodo DELETE
 http://localhost:8080/sysone/api/v1/sales/13
 Respuesta:
+
 
 {
     "deleted": true
