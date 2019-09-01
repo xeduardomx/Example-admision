@@ -109,7 +109,8 @@ USUARIO: admin
 CONTRASENIA: admin	
 Las property de MySql tienen los siguientes valores, hacer los cambios correspondientes.
 								    
-spring.datasource.username = root							
+spring.datasource.username = root
+
 spring.datasource.password = 					  
 
 
