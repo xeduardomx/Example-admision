@@ -34,9 +34,15 @@ Se evaluará tecnologías para desarrollar dicha API Rest (Spring MVC, CXF, Jers
 
 
 
+
 TECNOLOGIAS USADAS
 
 Patrones de diseño.
+
+spring boot starter security  
+USAR BASIC AUTH
+USUARIO: admin
+CONTRASENIA: admin
 
 Spring Boot - 2.0.4.RELEASE
 
@@ -92,6 +98,15 @@ A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, 
   2.	Un método get para buscar una única opción.
   3.	Un método post para registrar nuevas opciones.
   4.	Un método para eliminar existentes. 
+
+
+
+
+USAR BASIC AUTH AL USAR CON POSTMAN
+
+USUARIO: admin
+CONTRASENIA: admin
+
 
 
 Ver metodos y structuras de request en este link:
