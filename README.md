@@ -83,8 +83,7 @@ A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, 
   4.	Un método para eliminar existentes. 
 
 
-Ver documentacion en:
-
+Ver metodos y structuras de request en este link:
 http://localhost:8080/sysone/swagger.json
 
 
