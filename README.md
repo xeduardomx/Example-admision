@@ -306,6 +306,17 @@ Respuesta:
 }
 
 
+Actualizar:
+Metodo PUT
+http://localhost:8080/sysone/api/v1/cars/3
+
+
+{	
+    "name": "Sedán",
+    "baseCost": 230000.0
+}
+
+
 Eliminar:
 Metodo DELETE
 http://localhost:8080/sysone/api/v1/sales/42
