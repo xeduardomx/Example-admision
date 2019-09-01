@@ -1,7 +1,5 @@
 package com.syson.ejercicio.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +15,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +25,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.syson.ejercicio.dao.Car;
 import com.syson.ejercicio.dao.Option;
 import com.syson.ejercicio.dao.Sale;
-import com.syson.ejercicio.exception.GenericExceptionMapper;
 import com.syson.ejercicio.exception.ServiceException;
-import com.syson.ejercicio.repository.SaleRepository;
-import com.syson.ejercicio.service.SaleService;
 import com.syson.ejercicio.repository.CarRepository;
 import com.syson.ejercicio.repository.OptionRepository;
+import com.syson.ejercicio.repository.SaleRepository;
+import com.syson.ejercicio.service.SaleService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Api(value = "Api", produces = "application/json")
 @Component
 @Path("/api/v1")
 public class SaleResources {
@@ -51,6 +53,12 @@ public class SaleResources {
 	@Autowired
 	private SaleService saleService;
 
+	
+	@ApiOperation(
+			value = "List Sales", response = SaleResources.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
 	@Path("/sales")
@@ -58,6 +66,11 @@ public class SaleResources {
 		return saleRepository.findAll();
 	}
 
+	@ApiOperation(
+			value = "Get Sale by ID", response = SaleResources.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
 	@Path("/sales/{id}")
@@ -72,6 +85,11 @@ public class SaleResources {
 		return ResponseEntity.ok().body(sale);
 	}
 
+	@ApiOperation(
+			value = "Create and calculate new Sale", response = SaleResources.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -89,6 +107,11 @@ public class SaleResources {
 		return saleRepository.save(sale);
 	}
 
+	@ApiOperation(
+			value = "Edit Sales", response = SaleResources.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@PUT
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -112,6 +135,11 @@ public class SaleResources {
 		return ResponseEntity.ok(updatedCar);
 	}
 
+	@ApiOperation(
+			value = "Delete Sales", response = SaleResources.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@DELETE
 	@Path("/sales/{id}")
 	@Produces("application/json")

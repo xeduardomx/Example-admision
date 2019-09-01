@@ -26,6 +26,10 @@ import com.syson.ejercicio.dao.Option;
 import com.syson.ejercicio.exception.ServiceException;
 import com.syson.ejercicio.repository.OptionRepository;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @Component
 @Path("/api/v1")
 public class OptionResource {
@@ -33,6 +37,11 @@ public class OptionResource {
 	@Autowired
 	private OptionRepository optionRepository;
 
+	@ApiOperation(
+			value = "List options", response = OptionResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
 	@Path("/options")
@@ -40,6 +49,11 @@ public class OptionResource {
 		return optionRepository.findAll();
 	}
 	
+	@ApiOperation(
+			value = "Get option By ID", response = OptionResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
 	@Path("/options/{id}")
@@ -49,6 +63,11 @@ public class OptionResource {
 		return ResponseEntity.ok().body(option);
 	}
 	
+	@ApiOperation(
+			value = "Create new option", response = OptionResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -58,6 +77,11 @@ public class OptionResource {
 		return optionRepository.save(option);
 	}
 
+	@ApiOperation(
+			value = "Edit option by ID", response = OptionResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@PUT
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -73,6 +97,11 @@ public class OptionResource {
 		return ResponseEntity.ok(updatedOption);
 	}
 
+	@ApiOperation(
+			value = "Delete Option", response = OptionResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resource found"),
+			@ApiResponse(code = 404, message = "Resource not found") })
 	@DELETE
 	@Path("/options/{id}")
 	@Produces("application/json")
