@@ -36,16 +36,27 @@ Se evaluará tecnologías para desarrollar dicha API Rest (Spring MVC, CXF, Jers
 
 TECNOLOGIAS USADAS
 
-Tecnologias usadas:
+Patrones de diseño.
+
 Spring Boot - 2.0.4.RELEASE
+
 JDK - 1.8 or later
+
 Spring Framework - 5.0.8 RELEASE
+
 Hibernate - 5.2.17.Final
+
 Apache maven -3.6.1
+
 Spring Data JPA - 2.0.10 RELEASE
+
 IDE - Eclipse or Spring Tool Suite 4 (STS)
+
 MYSQL - 5.1.47
+
 Jersey - 2.26
+
+Javadoc 
 
 Para el testing del API se uso Postaman Client.
 
