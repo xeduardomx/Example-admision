@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.syson.ejercicio.dao.Option;
 import com.syson.ejercicio.exception.ServiceException;
-import com.syson.ejercicio.model.Option;
 import com.syson.ejercicio.repository.OptionRepository;
 
 @Component
@@ -39,13 +39,13 @@ public class OptionResource {
 	public List<Option> getAllOptions() throws SQLException {
 		return optionRepository.findAll();
 	}
-
+	
 	@GET
 	@Produces("application/json")
 	@Path("/options/{id}")
 	public ResponseEntity<Option> getOptionById(@PathParam(value = "id") Long optionId) throws ServiceException {
-		Option option = optionRepository.findById(optionId)
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
+		Option option = optionRepository.findById(optionId).orElseThrow(
+				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
 		return ResponseEntity.ok().body(option);
 	}
 	
@@ -62,10 +62,10 @@ public class OptionResource {
 	@Produces("application/json")
 	@Consumes("application/json")
 	@Path("/options/{id}")
-	public ResponseEntity<Option> updateOption(@PathParam(value = "id") Long optionId, @Valid @RequestBody Option optionDetails)
-			throws ServiceException {
-		Option option = optionRepository.findById(optionId)
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
+	public ResponseEntity<Option> updateOption(@PathParam(value = "id") Long optionId,
+			@Valid @RequestBody Option optionDetails) throws ServiceException {
+		Option option = optionRepository.findById(optionId).orElseThrow(
+				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
 		option.setDescription(optionDetails.getDescription());
 		option.setPriceOption(optionDetails.getPriceOption());
 		option.setShortCut(optionDetails.getShortCut());
@@ -77,8 +77,8 @@ public class OptionResource {
 	@Path("/options/{id}")
 	@Produces("application/json")
 	public Map<String, Boolean> deleteOption(@PathParam(value = "id") Long optionId) throws ServiceException {
-		Option option = optionRepository.findById(optionId)
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
+		Option option = optionRepository.findById(optionId).orElseThrow(
+				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
 
 		optionRepository.delete(option);
 		Map<String, Boolean> response = new HashMap<>();

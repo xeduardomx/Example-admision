@@ -1,7 +1,5 @@
 package com.syson.ejercicio.controller;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +21,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.syson.ejercicio.exception.GenericExceptionMapper;
+import com.syson.ejercicio.dao.Car;
 import com.syson.ejercicio.exception.ServiceException;
-import com.syson.ejercicio.model.Car;
 import com.syson.ejercicio.repository.CarRepository;
 
 @Component
@@ -50,7 +47,7 @@ public class CarResource {
 				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Car not found :: " + carId, 1));
 		return ResponseEntity.ok().body(car);
 	}
-	
+
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
@@ -65,7 +62,7 @@ public class CarResource {
 	@Consumes("application/json")
 	@Path("/cars/{id}")
 	public ResponseEntity<Car> updateCar(@PathParam(value = "id") Long carId, @Valid @RequestBody Car carDetails)
-			throws ServiceException  {
+			throws ServiceException {
 		Car car = carRepository.findById(carId)
 				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Car not found :: " + carId, 1));
 		car.setName(carDetails.getName());

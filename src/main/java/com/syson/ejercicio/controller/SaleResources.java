@@ -2,6 +2,7 @@ package com.syson.ejercicio.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.syson.ejercicio.dao.Car;
+import com.syson.ejercicio.dao.Option;
+import com.syson.ejercicio.dao.Sale;
 import com.syson.ejercicio.exception.GenericExceptionMapper;
 import com.syson.ejercicio.exception.ServiceException;
-import com.syson.ejercicio.model.Car;
-import com.syson.ejercicio.model.Sale;
 import com.syson.ejercicio.repository.SaleRepository;
+import com.syson.ejercicio.service.SaleService;
 import com.syson.ejercicio.repository.CarRepository;
 import com.syson.ejercicio.repository.OptionRepository;
 
@@ -38,12 +41,15 @@ public class SaleResources {
 
 	@Autowired
 	private CarRepository carRepository;
-	
+
 	@Autowired
 	private SaleRepository saleRepository;
-	
+
 	@Autowired
 	private OptionRepository optionRepository;
+
+	@Autowired
+	private SaleService saleService;
 
 	@GET
 	@Produces("application/json")
@@ -56,25 +62,29 @@ public class SaleResources {
 	@Produces("application/json")
 	@Path("/sales/{id}")
 	public ResponseEntity<Sale> getSaleById(@PathParam(value = "id") Long saleId) throws ServiceException {
-		Sale sale = saleRepository.findById(saleId)
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
-		
+		Sale sale = saleRepository.findById(saleId).orElseThrow(
+				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
+
 		Car car = carRepository.findById(sale.getCar().getId())
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Car not found :: " + sale.getCar().getId(), 1));
+				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(),
+						"Car not found :: " + sale.getCar().getId(), 1));
 		sale.setCar(car);
 		return ResponseEntity.ok().body(sale);
 	}
-	
+
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
 	@Path("/sales")
 	@PostMapping("/sales")
-	public Sale createSale(Sale sale) throws ServiceException {
-		
+	public Sale calculateAndcreateSale(Sale sale) throws ServiceException {
+
 		Car car = carRepository.findById(sale.getCar().getId())
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Car not found :: " + sale.getCar().getId(), 1));
-		
+				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(),
+						"Car not found :: " + sale.getCar().getId(), 1));
+
+		ArrayList<Option> listOptions = optionRepository.findListSc(sale.getOptions());
+		sale.setTotalPrice(saleService.calculateTotalCarPrice(car, listOptions));
 		sale.setCar(car);
 		return saleRepository.save(sale);
 	}
@@ -84,12 +94,20 @@ public class SaleResources {
 	@Consumes("application/json")
 	@Path("/sales/{id}")
 	public ResponseEntity<Sale> updateSale(@PathParam(value = "id") Long saleId, @Valid @RequestBody Sale saleDetails)
-			throws ServiceException  {
-		Sale sale = saleRepository.findById(saleId)
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
+			throws ServiceException {
+		Sale sale = saleRepository.findById(saleId).orElseThrow(
+				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
 		sale.setCar(saleDetails.getCar());
 		sale.setOptions(saleDetails.getOptions());
-		sale.setTotalPrice(saleDetails.getTotalPrice());
+		
+		Car car = carRepository.findById(sale.getCar().getId())
+				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(),
+						"Car not found :: " + sale.getCar().getId(), 1));
+		
+		sale.setCar(car);
+		ArrayList<Option> listOptions = optionRepository.findListSc(sale.getOptions());
+		sale.setTotalPrice(saleService.calculateTotalCarPrice(sale.getCar(), listOptions));
+		//sale.setTotalPrice(saleDetails.getTotalPrice());
 		final Sale updatedCar = saleRepository.save(sale);
 		return ResponseEntity.ok(updatedCar);
 	}
@@ -98,8 +116,8 @@ public class SaleResources {
 	@Path("/sales/{id}")
 	@Produces("application/json")
 	public Map<String, Boolean> deleteSale(@PathParam(value = "id") Long saleId) throws ServiceException {
-		Sale sale = saleRepository.findById(saleId)
-				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
+		Sale sale = saleRepository.findById(saleId).orElseThrow(
+				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
 
 		saleRepository.delete(sale);
 		Map<String, Boolean> response = new HashMap<>();

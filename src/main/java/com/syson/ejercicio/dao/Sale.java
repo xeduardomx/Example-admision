@@ -1,17 +1,13 @@
-package com.syson.ejercicio.model;
+package com.syson.ejercicio.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.mapping.Array;
 
 @Entity
 @Table(name = "saleCar")
@@ -22,7 +18,7 @@ public class Sale {
 	private long id;
 
 	@ManyToOne()
-	@JoinColumn(name="id_car_fK", nullable=false)
+	@JoinColumn(name = "id_car_fK", nullable = false)
 	private Car car;
 
 	@Column(name = "options", nullable = false)

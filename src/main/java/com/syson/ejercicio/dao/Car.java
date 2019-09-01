@@ -1,4 +1,4 @@
-package com.syson.ejercicio.model;
+package com.syson.ejercicio.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,28 +9,23 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "car",
-uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name")
-	}
-)
+@Table(name = "car", uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Car {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	 
+
 	@Column(name = "name", nullable = false)
 	private String name;
-	 
+
 	@Column(name = "base_cost", nullable = false)
 	private double baseCost;
-
 
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -51,6 +46,4 @@ public class Car {
 		this.baseCost = baseCost;
 	}
 
-	
-	
 }
