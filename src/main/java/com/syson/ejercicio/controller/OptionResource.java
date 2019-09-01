@@ -30,17 +30,32 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * <p>
+ * Option controller, contains all http methods to insert, update, delete
+ * </p>
+ * 
+ * @author Eduardo Mendoza
+ */
 @Component
 @Path("/api/v1")
 public class OptionResource {
 
+	/**
+	 * <p>
+	 * List Options method
+	 * </p>
+	 * It must be invoked with the GET method, not receiving parameters
+	 * 
+	 * @param Null
+	 * @return List of Options
+	 * @since 1.0
+	 */
 	@Autowired
 	private OptionRepository optionRepository;
 
-	@ApiOperation(
-			value = "List options", response = OptionResource.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	@ApiOperation(value = "List options", response = OptionResource.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
@@ -48,11 +63,20 @@ public class OptionResource {
 	public List<Option> getAllOptions() throws SQLException {
 		return optionRepository.findAll();
 	}
-	
-	@ApiOperation(
-			value = "Get option By ID", response = OptionResource.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+
+	/**
+	 * <p>
+	 * Find Option By ID
+	 * </p>
+	 * Search for a specific database record<br>
+	 * must be invoked by the GET method
+	 * 
+	 * @param ID
+	 * @return Car
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "Get option By ID", response = OptionResource.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
@@ -62,11 +86,21 @@ public class OptionResource {
 				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Option not found :: " + optionId, 1));
 		return ResponseEntity.ok().body(option);
 	}
-	
-	@ApiOperation(
-			value = "Create new option", response = OptionResource.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+
+	/**
+	 * <p>
+	 * Create Option
+	 * </p>
+	 * Create a new option<br>
+	 * must be invited by the POST method
+	 * 
+	 * @param body request, example: { "description": "Sistema de Frenos ABS",
+	 *             "priceOption": 14000.0, "shortCut": "ABS" }
+	 * @return Option
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "Create new option", response = OptionResource.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@POST
 	@Produces("application/json")
@@ -77,10 +111,20 @@ public class OptionResource {
 		return optionRepository.save(option);
 	}
 
-	@ApiOperation(
-			value = "Edit option by ID", response = OptionResource.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	/**
+	 * <p>
+	 * Modify car
+	 * </p>
+	 * Modify specific option<br>
+	 * must be invited by the DELETE method
+	 * 
+	 * @param body request, example: { "description": "Sistema de Frenos ABS",
+	 *             "priceOption": 14000.0, "shortCut": "ABS" }
+	 * @return Option
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "Edit option by ID", response = OptionResource.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@PUT
 	@Produces("application/json")
@@ -97,10 +141,20 @@ public class OptionResource {
 		return ResponseEntity.ok(updatedOption);
 	}
 
-	@ApiOperation(
-			value = "Delete Option", response = OptionResource.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	
+	/**
+	 * <p>
+	 * Delete option
+	 * </p>
+	 * Delete specific option<br>
+	 * must be invited by the PUT method
+	 * 
+	 * @param id
+	 * @return { "deleted": true }
+	 * 
+	 * */
+	@ApiOperation(value = "Delete Option", response = OptionResource.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@DELETE
 	@Path("/options/{id}")

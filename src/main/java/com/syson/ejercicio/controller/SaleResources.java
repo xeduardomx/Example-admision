@@ -36,6 +36,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * <p>
+ * Sale controller, contains all http methods to insert, update, delete
+ * </p>
+ * 
+ * @author Eduardo Mendoza
+ */
 @Api(value = "Api", produces = "application/json")
 @Component
 @Path("/api/v1")
@@ -53,11 +60,18 @@ public class SaleResources {
 	@Autowired
 	private SaleService saleService;
 
-	
-	@ApiOperation(
-			value = "List Sales", response = SaleResources.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	/**
+	 * <p>
+	 * List Sales method
+	 * </p>
+	 * It must be invoked with the GET method, not receiving parameters
+	 * 
+	 * @param Null
+	 * @return List of Cars
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "List Sales", response = SaleResources.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
@@ -66,10 +80,19 @@ public class SaleResources {
 		return saleRepository.findAll();
 	}
 
-	@ApiOperation(
-			value = "Get Sale by ID", response = SaleResources.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	/**
+	 * <p>
+	 * Find Sale By ID
+	 * </p>
+	 * Search for a specific database record<br>
+	 * must be invoked by the GET method
+	 * 
+	 * @param ID
+	 * @return Car
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "Get Sale by ID", response = SaleResources.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@GET
 	@Produces("application/json")
@@ -85,10 +108,20 @@ public class SaleResources {
 		return ResponseEntity.ok().body(sale);
 	}
 
-	@ApiOperation(
-			value = "Create and calculate new Sale", response = SaleResources.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	/**
+	 * <p>
+	 * Create and calculate Sale
+	 * </p>
+	 * Create a new car<br>
+	 * must be invited by the POST method
+	 * 
+	 * @param body request, example: { "car": { "id": 1 }, "options":
+	 *             ["AA","AB","LL"] }
+	 * @return Car
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "Create and calculate new Sale", response = SaleResources.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@POST
 	@Produces("application/json")
@@ -107,10 +140,20 @@ public class SaleResources {
 		return saleRepository.save(sale);
 	}
 
-	@ApiOperation(
-			value = "Edit Sales", response = SaleResources.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	/**
+	 * <p>
+	 * Modify and re3calculate Sale
+	 * </p>
+	 * Modify specific sale<br>
+	 * must be invited by the PUT method
+	 * 
+	 * @param body request, example: { "car": { "id": 1 }, "options":
+	 *             ["AA","AB","LL"] }
+	 * @return Car
+	 * @since 1.0
+	 */
+	@ApiOperation(value = "Edit Sales", response = SaleResources.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@PUT
 	@Produces("application/json")
@@ -122,23 +165,32 @@ public class SaleResources {
 				() -> new ServiceException(HttpStatus.NOT_FOUND.value(), "Sale not found :: " + saleId, 1));
 		sale.setCar(saleDetails.getCar());
 		sale.setOptions(saleDetails.getOptions());
-		
+
 		Car car = carRepository.findById(sale.getCar().getId())
 				.orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(),
 						"Car not found :: " + sale.getCar().getId(), 1));
-		
+
 		sale.setCar(car);
 		ArrayList<Option> listOptions = optionRepository.findListSc(sale.getOptions());
 		sale.setTotalPrice(saleService.calculateTotalCarPrice(sale.getCar(), listOptions));
-		//sale.setTotalPrice(saleDetails.getTotalPrice());
+		// sale.setTotalPrice(saleDetails.getTotalPrice());
 		final Sale updatedCar = saleRepository.save(sale);
 		return ResponseEntity.ok(updatedCar);
 	}
 
-	@ApiOperation(
-			value = "Delete Sales", response = SaleResources.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Resource found"),
+	/**
+	 * <p>
+	 * Delete sale
+	 * </p>
+	 * Delete specific sale<br>
+	 * must be invited by the DELETE method
+	 * 
+	 * @param id
+	 * @return { "deleted": true }
+	 * 
+	 * */
+	@ApiOperation(value = "Delete Sales", response = SaleResources.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Resource found"),
 			@ApiResponse(code = 404, message = "Resource not found") })
 	@DELETE
 	@Path("/sales/{id}")

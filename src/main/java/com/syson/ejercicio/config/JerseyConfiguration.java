@@ -24,7 +24,14 @@ import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 
-
+/**
+* Configuration class
+* In this class the drivers must be registered
+* They contain the Swagger configuration
+* 
+* @author Eduardo Mendoza
+* 
+*/
 @Component
 @ApplicationPath("/sysone")
 public class JerseyConfiguration extends ResourceConfig {
