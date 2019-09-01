@@ -75,7 +75,7 @@ Crear, modificar, listar y eliminar objetos del tipo “Opciones”.
 
 Crear, modificar, listar y eliminar objetos del tipo “Ventas”.
 
-A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, es en esta instancia donde se calcula el monto planteado en el enunciado, recibe como parámetro uno de los autos registrados y las piezas disponibles que desee adicionar; este endPoint retornara un registro de venta sumando el costo base del auto y todas sus piezas, para la solución se aplicaros distintas tecnologías y el patrón de diseño Decorator.
+A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, es en esta instancia donde se calcula el monto planteado en el enunciado, recibe como parámetro uno de los autos registrados y las piezas disponibles que desee adicionar; este endPoint retornara un registro de venta sumando el costo base del auto y todas sus piezas, para la solución se aplicaron distintas tecnologías y el patrón estructural Decorator.
 
   1.	Un método get para listar todos los opciones (partes adicionales) registrados.
   2.	Un método get para buscar una única opción.
