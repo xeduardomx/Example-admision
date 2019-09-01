@@ -82,6 +82,320 @@ A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, 
   3.	Un método post para registrar nuevas opciones.
   4.	Un método para eliminar existentes. 
 
+Ver documentacion en:
+
+http://localhost:8080/sysone/swagger.json
+
+http://localhost:8080/swagger-ui.html
 
 
 
+ENDPOINTS
+
+VENTAS
+
+Crear una venta nueva:
+http://localhost:8080/sysone/api/v1/sales
+metodo POST
+{
+    "car": {
+            "id": 1
+        },
+    "options": ["AA","AB","LL"]
+}
+
+Respuesta:
+
+{
+    "id": 50,
+    "car": {
+        "id": 1
+    },
+    "options": [
+        "AA",
+        "AB",
+        "LL"
+    ],
+    "totalPrice": 309000.0
+}
+
+
+Listar Ventas:
+metodo GET
+http://localhost:8080/sysone/api/v1/sales/
+Respuesta:
+[
+    {
+        "id": 42,
+        "car": {
+            "id": 2,
+            "name": "Familiar",
+            "baseCost": 245000.0
+        },
+        "options": [
+            "AA",
+            "AB",
+            "CC"
+        ],
+        "totalPrice": 250000.0
+    },
+    {
+        "id": 43,
+        "car": {
+            "id": 1,
+            "name": "Coupé",
+            "baseCost": 270000.0
+        },
+        "options": [
+            "CC",
+            "CR",
+            "ERE"
+        ],
+        "totalPrice": 310000.0
+    }
+]
+
+
+Buscar por ID:
+metodo GET
+http://localhost:8080/sysone/api/v1/sales/42
+
+Respuestas:
+{
+    "headers": {},
+    "body": {
+        "id": 42,
+        "car": {
+            "id": 2,
+            "name": "Familiar",
+            "baseCost": 245000.0
+        },
+        "options": [
+            "AA",
+            "AB",
+            "CC"
+        ],
+        "totalPrice": 250000.0
+    },
+    "statusCode": "OK",
+    "statusCodeValue": 200
+}
+
+EDITAR:
+metodo PUT
+http://localhost:8080/sysone/api/v1/sales/49
+{
+    "id": 42,
+    "car": {
+            "id": 2
+        },
+    "options": ["AA","AB","LL"]
+}
+
+Respuestas:
+
+{
+    "headers": {},
+    "body": {
+        "id": 49,
+        "car": {
+            "id": 2,
+            "name": "Familiar",
+            "baseCost": 245000.0
+        },
+        "options": [
+            "AA",
+            "AB",
+            "LL"
+        ],
+        "totalPrice": 284000.0
+    },
+    "statusCode": "OK",
+    "statusCodeValue": 200
+}
+
+
+Eliminar:
+Metodo DELETE
+http://localhost:8080/sysone/api/v1/sales/42
+
+Respuesta:
+{
+    "deleted": true
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+AUTOMOVILES
+
+Crear:
+Metodo POST
+http://localhost:8080/sysone/api/v1/cars
+{
+    "name": "Sedán",
+    "baseCost": 230000.0
+}
+
+Respuesta:
+{
+    "id": 3,
+    "name": "Sedán",
+    "baseCost": 230000.0
+}
+
+
+
+Listar todos:
+Metodo GET
+http://localhost:8080/sysone/api/v1/cars
+[
+    {
+        "id": 1,
+        "name": "Coupe",
+        "baseCost": 270000.0
+    },
+    {
+        "id": 2,
+        "name": "Familiar",
+        "baseCost": 245000.0
+    },
+    {
+        "id": 3,
+        "name": "Sedán",
+        "baseCost": 230000.0
+    }
+]
+
+Buscar por ID:
+Metodo GET
+http://localhost:8080/sysone/api/v1/cars/1
+
+Respuesta:
+{
+    "headers": {},
+    "body": {
+        "id": 1,
+        "name": "baseCost",
+        "baseCost": 0.0
+    },
+    "statusCode": "OK",
+    "statusCodeValue": 200
+}
+
+Eliminar:
+Metodo DELETE
+http://localhost:8080/sysone/api/v1/sales/42
+
+Respuesta:
+{
+    "deleted": true
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+Opciones/Piezas Adicionales
+
+Crear
+Metodo POST
+http://localhost:8080/sysone/api/v1/options
+{
+	"description": "Sistema de Frenos ABS",
+    "priceOption": 14000.0,
+    "shortCut": "ABS"
+}
+
+Respuesta:
+
+
+
+Listar todos:
+Metodo GET
+http://localhost:8080/sysone/api/v1/options/
+Respuesta:
+
+[
+    {
+        "id": 9,
+        "description": "Techo Corredizo",
+        "priceOption": 12000.0,
+        "shortCut": "TC"
+    },
+    {
+        "id": 10,
+        "description": "Aire Acondicionado",
+        "priceOption": 20000.0,
+        "shortCut": "AA"
+    },
+    {
+        "id": 11,
+        "description": "Sistema de Frenos ABS",
+        "priceOption": 14000.0,
+        "shortCut": "ABS"
+    },
+    {
+        "id": 12,
+        "description": "AirBag",
+        "priceOption": 7000.0,
+        "shortCut": "AB"
+    },
+    {
+        "id": 13,
+        "description": "Llantas de aleación",
+        "priceOption": 12000.0,
+        "shortCut": "LL"
+    }
+]
+
+
+
+Buscar por ID
+Metodo GET
+http://localhost:8080/sysone/api/v1/options/9
+Respuesta:
+
+{
+    "headers": {},
+    "body": {
+        "id": 9,
+        "description": "Techo Corredizo",
+        "priceOption": 12000.0,
+        "shortCut": "TC"
+    },
+    "statusCode": "OK",
+    "statusCodeValue": 200
+}
+
+
+
+Modificar
+Metodo PUT
+http://localhost:8080/sysone/api/v1/options/11
+{
+	"description": "Sistema de Frenos ABS",
+    "priceOption": 14000.0,
+    "shortCut": "ABS"
+}
+
+Respuesta:
+
+{
+    "headers": {},
+    "body": {
+        "id": 11,
+        "description": "Sistema de Frenos ABS",
+        "priceOption": 14000.0,
+        "shortCut": "ABS"
+    },
+    "statusCode": "OK",
+    "statusCodeValue": 200
+}
+
+
+Eliminar
+Metodo DELETE
+http://localhost:8080/sysone/api/v1/sales/13
+Respuesta:
+
+{
+    "deleted": true
+}
