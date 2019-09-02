@@ -129,6 +129,10 @@ ENDPOINTS
 
 (Primero se deben cargar los datos de autos y opciones antes de invcoar el endpoint de ventas, usar los endpoinds correspondientes, o correr el scrip de MySql)
 
+Script SQL:
+
+BASE.sql
+
 VENTAS
 
 Crear una venta nueva:
