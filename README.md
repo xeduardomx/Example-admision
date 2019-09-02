@@ -133,6 +133,10 @@ Script SQL:
 
 BASE.sql
 
+Si esto falla, en MySql crea la base de datos: sysone_database
+
+A continuacion carga los datos de CARS y OPTIONS usando los endpoinds correspondientes, luego podras cargar las ventas.
+
 VENTAS
 
 Crear una venta nueva:
