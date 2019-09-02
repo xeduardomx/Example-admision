@@ -127,7 +127,7 @@ http://localhost:8080/sysone/swagger.json
 
 ENDPOINTS
 
-(Primero se deben cargar los datos de autos y opciones antes de invoar el endpoint de ventas, usar los endpoinds correspondientes)
+(Primero se deben cargar los datos de autos y opciones antes de invcoar el endpoint de ventas, usar los endpoinds correspondientes, o correr el scrip de MySql)
 
 VENTAS
 
