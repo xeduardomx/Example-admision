@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "option", uniqueConstraints = { @UniqueConstraint(columnNames = "description"),
+@Table(name = "options", uniqueConstraints = { @UniqueConstraint(columnNames = "description"),
 		@UniqueConstraint(columnNames = "short_cut") })
 public class Option {
 
