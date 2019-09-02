@@ -102,11 +102,17 @@ A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, 
 
 
 
-USAR BASIC AUTH AL USAR CON POSTMAN
+USAR BASIC AUTH CON POSTMAN
 
-///////////////////////////////////////////////////////////////////////////////////											    
+///////////////////////////////////////////////////////////////////////////////////
+
+USAR BASIC
+
 USUARIO: admin	
-CONTRASENIA: admin	
+
+CONTRASENIA: admin
+
+
 Las property de MySql tienen los siguientes valores, hacer los cambios correspondientes.
 								    
 spring.datasource.username = root
@@ -114,11 +120,14 @@ spring.datasource.username = root
 spring.datasource.password = 					  
 
 
+
 Ver metodos y structuras de request en este link:
 http://localhost:8080/sysone/swagger.json
 
 
 ENDPOINTS
+
+(Primero se deben cargar los datos de autos y opciones antes de invoar el endpoint de ventas, usar los endpoinds correspondientes)
 
 VENTAS
 
