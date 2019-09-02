@@ -121,6 +121,7 @@ spring.datasource.password =
 
 
 
+
 Ver metodos y structuras de request en este link:
 http://localhost:8080/sysone/swagger.json
 
@@ -132,6 +133,15 @@ ENDPOINTS
 Script SQL:
 
 BASE.sql
+
+Pasos para importar:
+
+crear base de datos: sysone_database
+
+Por consola ejecutar:
+
+mysql -u username -p sysone_database < BASE.sql
+
 
 Si esto falla, en MySql crea la base de datos: sysone_database
 
