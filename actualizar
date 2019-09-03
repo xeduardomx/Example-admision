@@ -1,5 +1,7 @@
 https://github.com/VIIgit/swagger-spring-jaxrs-sample-app
 
+//////////////////////////////////////////////////////////////////////
+
 package com.syson.ejercicio.config;
 
 import javax.annotation.PostConstruct;
@@ -28,7 +30,7 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 * 
 */
 @Component
-@ApplicationPath("/app")
+@ApplicationPath("/sysone")
 public class JerseyConfiguration extends ResourceConfig {
 	
 	public JerseyConfiguration() {
@@ -53,7 +55,6 @@ public class JerseyConfiguration extends ResourceConfig {
 		config.setTitle("Prueba admision sysone, Jersey, Swagger");
 		config.setVersion("v1");
 		config.setContact("Eduardo Mendoza");
-		config.setHost("localhost:8080");
 		config.setSchemes(new String[] { "http", "https" });
 		config.setBasePath("/sysone");
 		config.setScan();
@@ -62,6 +63,9 @@ public class JerseyConfiguration extends ResourceConfig {
 		config.setScan(true);
 	}
 }
+
+//////////////////////////////////////////////////////////////////////
+
 
 
 package com.syson.ejercicio.config;
@@ -88,3 +92,7 @@ pom
 
 crear directorio sources y subir archivos de ui de swagger
 esources\swagger-ui\dist
+
+http://localhost:8080/swagger-ui/index.html
+
+http://localhost:8080/sysone/swagger.json
