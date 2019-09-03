@@ -157,7 +157,7 @@ http://localhost:8080/sysone/api/v1/sales
 
 {
     "car": {
-            "id": 1
+            "id": 6
         },
     "options": ["AA","AB","LL"]
 }
@@ -167,7 +167,7 @@ Respuesta:
 
 
 {
-    "id": 50,
+    "id": 9,
     "car": {
         "id": 1
     },
@@ -176,7 +176,7 @@ Respuesta:
         "AB",
         "LL"
     ],
-    "totalPrice": 309000.0
+    "totalPrice": 269000.0
 }
 
 
@@ -188,77 +188,77 @@ Respuesta:
 
 
 [
-    {
-        "id": 42,
-        "car": {
-            "id": 2,
-            "name": "Familiar",
-            "baseCost": 245000.0
-        },
-        "options": [
-            "AA",
-            "AB",
-            "CC"
-        ],
-        "totalPrice": 250000.0
-    },
-    {
-        "id": 43,
-        "car": {
-            "id": 1,
-            "name": "Coupé",
-            "baseCost": 270000.0
-        },
-        "options": [
-            "CC",
-            "CR",
-            "ERE"
-        ],
-        "totalPrice": 310000.0
-    }
+      {
+      "id": 9,
+      "car":       {
+         "id": 6,
+         "name": "Auto Sedan",
+         "baseCost": 230000
+      },
+      "options":       [
+         "AA",
+         "AB",
+         "LL"
+      ],
+      "totalPrice": 269000
+   },
+      {
+      "id": 10,
+      "car":       {
+         "id": 7,
+         "name": "Familiar",
+         "baseCost": 245000
+      },
+      "options":       [
+         "LL",
+         "AB",
+         "LL"
+      ],
+      "totalPrice": 264000
+   }
 ]
 
 
 Buscar por ID:
 metodo GET
-http://localhost:8080/sysone/api/v1/sales/42
+http://localhost:8080/sysone/api/v1/sales/10
 
 
 Respuestas:
 
 
 {
-    "headers": {},
-    "body": {
-        "id": 42,
-        "car": {
-            "id": 2,
-            "name": "Familiar",
-            "baseCost": 245000.0
-        },
-        "options": [
-            "AA",
-            "AB",
-            "CC"
-        ],
-        "totalPrice": 250000.0
-    },
-    "statusCode": "OK",
-    "statusCodeValue": 200
+   "headers": {},
+   "body":    {
+      "id": 10,
+      "car":       {
+         "id": 7,
+         "name": "Familiar",
+         "baseCost": 245000
+      },
+      "options":       [
+         "LL",
+         "AB",
+         "LL"
+      ],
+      "totalPrice": 264000
+   },
+   "statusCode": "OK",
+   "statusCodeValue": 200
 }
 
 
 EDITAR:
 metodo PUT
-http://localhost:8080/sysone/api/v1/sales/49
+http://localhost:8080/sysone/api/v1/sales/10
 
 
 {
-    "id": 42,
+    "id": 10,
     "car": {
-            "id": 2
+            "id": 6
         },
-    "options": ["AA","AB","LL"]
+    "options": ["TC","AB","LL"]
 }
 
 
@@ -266,29 +266,29 @@ Respuestas:
 
 
 {
-    "headers": {},
-    "body": {
-        "id": 49,
-        "car": {
-            "id": 2,
-            "name": "Familiar",
-            "baseCost": 245000.0
-        },
-        "options": [
-            "AA",
-            "AB",
-            "LL"
-        ],
-        "totalPrice": 284000.0
-    },
-    "statusCode": "OK",
-    "statusCodeValue": 200
+   "headers": {},
+   "body":    {
+      "id": 10,
+      "car":       {
+         "id": 6,
+         "name": "Auto Sedan",
+         "baseCost": 230000
+      },
+      "options":       [
+         "TC",
+         "AB",
+         "LL"
+      ],
+      "totalPrice": 261000
+   },
+   "statusCode": "OK",
+   "statusCodeValue": 200
 }
 
 
 Eliminar:
 Metodo DELETE
-http://localhost:8080/sysone/api/v1/sales/42
+http://localhost:8080/sysone/api/v1/sales/10
 
 
 Respuesta:
@@ -315,8 +315,8 @@ Respuesta:
 
 
 {
-    "id": 3,
-    "name": "Sedán",
+    "id": 6,
+    "name": "Sedan",
     "baseCost": 230000.0
 }
 
@@ -328,56 +328,68 @@ http://localhost:8080/sysone/api/v1/cars
 
 
 [
-    {
-        "id": 1,
-        "name": "Coupe",
-        "baseCost": 270000.0
-    },
-    {
-        "id": 2,
-        "name": "Familiar",
-        "baseCost": 245000.0
-    },
-    {
-        "id": 3,
-        "name": "Sedán",
-        "baseCost": 230000.0
-    }
+      {
+      "id": 6,
+      "name": "Sedan",
+      "baseCost": 230000
+   },
+      {
+      "id": 7,
+      "name": "Familiar",
+      "baseCost": 245000
+   },
+      {
+      "id": 8,
+      "name": "Coupe",
+      "baseCost": 270000
+   }
 ]
 
 
 Buscar por ID:
 Metodo GET
-http://localhost:8080/sysone/api/v1/cars/1
+http://localhost:8080/sysone/api/v1/cars/6
 
 
 Respuesta:
 {
-    "headers": {},
-    "body": {
-        "id": 1,
-        "name": "baseCost",
-        "baseCost": 0.0
-    },
-    "statusCode": "OK",
-    "statusCodeValue": 200
+   "headers": {},
+   "body":    {
+      "id": 6,
+      "name": "Sedan",
+      "baseCost": 230000
+   },
+   "statusCode": "OK",
+   "statusCodeValue": 200
 }
 
 
 Actualizar:
 Metodo PUT
-http://localhost:8080/sysone/api/v1/cars/3
+http://localhost:8080/sysone/api/v1/cars/6
 
 
 {	
-    "name": "Sedán",
+    "name": "Auto Sedan",
     "baseCost": 230000.0
+}
+
+Respuesta:
+{
+   "headers": {},
+   "body":    {
+      "id": 6,
+      "name": "Auto Sedan",
+      "baseCost": 230000
+   },
+   "statusCode": "OK",
+   "statusCodeValue": 200
 }
 
 
 Eliminar:
 Metodo DELETE
-http://localhost:8080/sysone/api/v1/sales/42
+http://localhost:8080/sysone/api/v1/cars/6
 
 
 Respuesta:
@@ -405,7 +417,7 @@ Respuesta:
 
 
 {
-    "id": 11,
+    "id": 1,
     "description": "Sistema de Frenos ABS",
     "priceOption": 14000.0,
     "shortCut": "ABS"
@@ -419,56 +431,56 @@ Respuesta:
 
 
 [
-    {
-        "id": 9,
-        "description": "Techo Corredizo",
-        "priceOption": 12000.0,
-        "shortCut": "TC"
-    },
-    {
-        "id": 10,
-        "description": "Aire Acondicionado",
-        "priceOption": 20000.0,
-        "shortCut": "AA"
-    },
-    {
-        "id": 11,
-        "description": "Sistema de Frenos ABS",
-        "priceOption": 14000.0,
-        "shortCut": "ABS"
-    },
-    {
-        "id": 12,
-        "description": "AirBag",
-        "priceOption": 7000.0,
-        "shortCut": "AB"
-    },
-    {
-        "id": 13,
-        "description": "Llantas de aleación",
-        "priceOption": 12000.0,
-        "shortCut": "LL"
-    }
+      {
+      "id": 1,
+      "description": "Sistema de Frenos ABS",
+      "priceOption": 14000,
+      "shortCut": "ABS"
+   },
+      {
+      "id": 2,
+      "description": "Techo corredizo",
+      "priceOption": 12000,
+      "shortCut": "TC"
+   },
+      {
+      "id": 3,
+      "description": "Aire acondicionado",
+      "priceOption": 20000,
+      "shortCut": "AA"
+   },
+      {
+      "id": 4,
+      "description": "Airbag",
+      "priceOption": 7000,
+      "shortCut": "AB"
+   },
+      {
+      "id": 5,
+      "description": "Llantas de aleacion",
+      "priceOption": 12000,
+      "shortCut": "LL"
+   }
 ]
 
 
 
 Buscar por ID
 Metodo GET
-http://localhost:8080/sysone/api/v1/options/9
+http://localhost:8080/sysone/api/v1/options/1
 Respuesta:
 
 
 {
-    "headers": {},
-    "body": {
-        "id": 9,
-        "description": "Techo Corredizo",
-        "priceOption": 12000.0,
-        "shortCut": "TC"
-    },
-    "statusCode": "OK",
-    "statusCodeValue": 200
+   "headers": {},
+   "body":    {
+      "id": 1,
+      "description": "Sistema de Frenos ABS",
+      "priceOption": 14000,
+      "shortCut": "ABS"
+   },
+   "statusCode": "OK",
+   "statusCodeValue": 200
 }
 
 
@@ -476,12 +488,12 @@ Respuesta:
 
 Modificar
 Metodo PUT
-http://localhost:8080/sysone/api/v1/options/11
+http://localhost:8080/sysone/api/v1/options/1
 
 
 {
 	"description": "Sistema de Frenos ABS",
-    "priceOption": 14000.0,
+    "priceOption": 14001.0,
     "shortCut": "ABS"
 }
 
@@ -490,21 +502,21 @@ Respuesta:
 
 
 {
-    "headers": {},
-    "body": {
-        "id": 11,
-        "description": "Sistema de Frenos ABS",
-        "priceOption": 14000.0,
-        "shortCut": "ABS"
-    },
-    "statusCode": "OK",
-    "statusCodeValue": 200
+   "headers": {},
+   "body":    {
+      "id": 1,
+      "description": "Sistema de Frenos ABS",
+      "priceOption": 14001,
+      "shortCut": "ABS"
+   },
+   "statusCode": "OK",
+   "statusCodeValue": 200
 }
 
 
 Eliminar
 Metodo DELETE
-http://localhost:8080/sysone/api/v1/sales/13
+http://localhost:8080/sysone/api/v1/options/6
 Respuesta:
 
 
