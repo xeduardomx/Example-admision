@@ -84,11 +84,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
 }
 
-pom
+pom /////////////
 <dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+			<version>1.5.23</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+////////////////////
+
 
 crear directorio sources y subir archivos de ui de swagger
 esources\swagger-ui\dist
