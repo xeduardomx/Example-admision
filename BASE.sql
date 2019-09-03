@@ -37,7 +37,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` VALUES (1,270000,'Coupe'),(2,245000,'Familiar'),(3,230000,'Sedan');
+INSERT INTO `car` VALUES (6,230000,'Sedan'),(7,245000,'Familiar'),(8,270000,'Coupe');
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (2),(2),(2);
+INSERT INTO `hibernate_sequence` VALUES (11),(11),(11);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,8 +74,10 @@ CREATE TABLE `options` (
   `id` bigint(20) NOT NULL,
   `description` varchar(255) NOT NULL,
   `price_option` double NOT NULL,
-  `short_cut` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `short_cut` varchar(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UKs312j3duli3arplqvnw9i3pxp` (`description`),
+  UNIQUE KEY `UKdbbde26y9gwyjh7qqh070vd4g` (`short_cut`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,7 +87,7 @@ CREATE TABLE `options` (
 
 LOCK TABLES `options` WRITE;
 /*!40000 ALTER TABLE `options` DISABLE KEYS */;
-INSERT INTO `options` VALUES (1,'Techo Corredizo',12000,'TC'),(2,'Aire Acondicionado',20000,'AA'),(3,'Sistema de Frenos ABS',14000,'ABS'),(4,'Air Bag',7000,'AB'),(5,'Llantas de Alineacion',12000,'LL');
+INSERT INTO `options` VALUES (1,'Sistema de Frenos ABS',14000,'ABS'),(2,'Techo corredizo',12000,'TC'),(3,'Aire acondicionado',20000,'AA'),(4,'Airbag',7000,'AB'),(5,'Llantas de aleacion',12000,'LL');
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +115,7 @@ CREATE TABLE `sale_car` (
 
 LOCK TABLES `sale_car` WRITE;
 /*!40000 ALTER TABLE `sale_car` DISABLE KEYS */;
-INSERT INTO `sale_car` VALUES (1,_binary '¬\í\0ur\0[Ljava.lang.String;­\ÒV\ç\é{G\0\0xp\0\0\0t\0AAt\0ABt\0LL',309000,1);
+INSERT INTO `sale_car` VALUES (9,_binary '¬\í\0ur\0[Ljava.lang.String;­\ÒV\ç\é{G\0\0xp\0\0\0t\0AAt\0ABt\0LL',269000,6),(10,_binary '¬\í\0ur\0[Ljava.lang.String;­\ÒV\ç\é{G\0\0xp\0\0\0t\0LLt\0ABt\0LL',264000,7);
 /*!40000 ALTER TABLE `sale_car` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -126,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-02 13:51:03
+-- Dump completed on 2019-09-03 14:12:48
