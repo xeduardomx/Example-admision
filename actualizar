@@ -1,0 +1,90 @@
+https://github.com/VIIgit/swagger-spring-jaxrs-sample-app
+
+package com.syson.ejercicio.config;
+
+import javax.annotation.PostConstruct;
+import javax.ws.rs.ApplicationPath;
+
+import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.stereotype.Component;
+
+import com.syson.ejercicio.controller.CarResource;
+import com.syson.ejercicio.controller.OptionResource;
+import com.syson.ejercicio.controller.SaleResources;
+import com.syson.ejercicio.exception.GenericExceptionMapper;
+import com.syson.ejercicio.exception.ServiceExceptionMapper;
+
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
+
+
+/**
+* Configuration class
+* In this class the drivers must be registered
+* They contain the Swagger configuration
+* 
+* @author Eduardo Mendoza
+* 
+*/
+@Component
+@ApplicationPath("/app")
+public class JerseyConfiguration extends ResourceConfig {
+	
+	public JerseyConfiguration() {
+		register(CarResource.class);
+		register(OptionResource.class);
+		register(SaleResources.class);
+		register(ServiceExceptionMapper.class);
+		register(GenericExceptionMapper.class);
+	}
+	
+		
+	@PostConstruct
+	public void init() {
+		this.configureSwagger();
+	}
+	
+	private void configureSwagger() {
+		this.register(ApiListingResource.class);
+		this.register(SwaggerSerializers.class);
+
+		BeanConfig config = new BeanConfig();
+		config.setTitle("Prueba admision sysone, Jersey, Swagger");
+		config.setVersion("v1");
+		config.setContact("Eduardo Mendoza");
+		config.setHost("localhost:8080");
+		config.setSchemes(new String[] { "http", "https" });
+		config.setBasePath("/sysone");
+		config.setScan();
+		config.setResourcePackage("com.syson.ejercicio.controller");
+		config.setPrettyPrint(true);
+		config.setScan(true);
+	}
+}
+
+
+package com.syson.ejercicio.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+@Configuration
+@EnableWebMvc
+public class WebConfig extends WebMvcConfigurerAdapter {
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {//http://localhost:8080/api/swagger.json
+		registry.addResourceHandler("/swagger-ui/**").addResourceLocations("classpath:/swagger-ui/dist/");
+	}
+}
+
+pom
+<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+crear directorio sources y subir archivos de ui de swagger
+esources\swagger-ui\dist
