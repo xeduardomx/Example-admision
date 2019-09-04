@@ -102,18 +102,21 @@ A través de estos endpoint podemos crear, modificar, listar y eliminar ventas, 
 
 ANTES DE EMPEZAR
 
-Crear base de datos 
-
-sysone_database
-
-en MySql
-
-USAR BASIC
+USAR BASIC AUTH (Se configuro con spring security)
 
 USUARIO: admin	
 
 CONTRASENIA: admin
 
+
+BASE DE DATOS
+
+
+Crear base de datos 
+
+sysone_database
+
+en MySql
 
 Las property de MySql tienen los siguientes valores, hacer los cambios correspondientes.
 								    
