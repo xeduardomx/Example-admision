@@ -123,7 +123,7 @@ spring.datasource.password =
 
 
 Ver metodos y structuras de request en este link:
-http://localhost:8080/swagger-ui/
+http://localhost:8080/swagger-ui/index.html
 
 ENDPOINTS
 
