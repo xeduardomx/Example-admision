@@ -26,6 +26,7 @@ import com.syson.ejercicio.dao.Option;
 import com.syson.ejercicio.exception.ServiceException;
 import com.syson.ejercicio.repository.OptionRepository;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -37,6 +38,7 @@ import io.swagger.annotations.ApiResponses;
  * 
  * @author Eduardo Mendoza
  */
+@Api(value = "Api", produces = "application/json")
 @Component
 @Path("/api/v1")
 public class OptionResource {

@@ -33,10 +33,8 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 * 
 */
 @Component
-@ApplicationPath("/sysone")
+@ApplicationPath("/app")
 public class JerseyConfiguration extends ResourceConfig {
-	@Value("${spring.jersey.application-path:/sysone}")
-	private String apiPath;
 	
 	public JerseyConfiguration() {
 		register(CarResource.class);
@@ -46,6 +44,7 @@ public class JerseyConfiguration extends ResourceConfig {
 		register(GenericExceptionMapper.class);
 	}
 	
+		
 	@PostConstruct
 	public void init() {
 		this.configureSwagger();
@@ -59,8 +58,8 @@ public class JerseyConfiguration extends ResourceConfig {
 		config.setTitle("Prueba admision sysone, Jersey, Swagger");
 		config.setVersion("v1");
 		config.setContact("Eduardo Mendoza");
-		config.setSchemes(new String[] { "http" });
-		config.setBasePath("/sysone");
+		config.setSchemes(new String[] { "http", "https" });
+		config.setBasePath("/app");
 		config.setScan();
 		config.setResourcePackage("com.syson.ejercicio.controller");
 		config.setPrettyPrint(true);
