@@ -1,5 +1,5 @@
 # Example-admision
-Proyecto desarrollado como parte de recruitmen journey de la empresas Sysone.
+Proyecto desarrollado como parte de recruitmen journey de una empresas de software.
 
 Enunciado
 
